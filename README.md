@@ -1,3 +1,3 @@
-# Windows-Notification-PS
+# Powershell Scripts
 
-Powershell script that sends a Windows notification to a specific URL
+1)Windows powershell script that creates a notification using Toast. 
