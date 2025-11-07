@@ -93,8 +93,8 @@ $title = "Accounting Assistant"
 $department = "Accounting"
 $firstletter = $fname.Substring(0, 1)
 $username = "$firstletter$lname"
-$Path = "OU=Users,OU=Accounting,OU=Office,OU=Burnaby,DC=dc,DC=com"
-$ComputerPath = "OU=Computers,OU=Accounting,OU=Office,OU=Burnaby,DC=dc,DC=com"
+$Path = "OU=Users"
+$ComputerPath = "OU=Computers"
 $template = "AccoutingTemplate"  
 $user = Get-ADUser -Identity $template -Properties MemberOf
 
@@ -103,7 +103,7 @@ $groupPaths = $user.MemberOf | ForEach-Object {
     $group.DistinguishedName
 }
 
-New-ADUser -Name "$fname $lname" -Givenname "$fname" -Surname "$lname" -Office "Burnaby" -EmailAddress "$username@ventanaconstruction.com" -SamAccountName "$username" -UserPrincipalName "$username@ventanaconstruction.com" -Department "$department" -Title "$title" -Company "Ventana Construction Corporation" -Description "$description" -Path "$path" -Enabled $true -AccountPassword(Read-Host -AsSecureString "Input a Password") -Displayname "$fname $lname" -OfficePhone "$number" -Mobile "$number"
+New-ADUser -Name "$fname $lname" -Givenname "$fname" -Surname "$lname" -Office "Burnaby" -EmailAddress "$username@test.com" -SamAccountName "$username" -UserPrincipalName "$username@test.com" -Department "$department" -Title "$title" -Company "test" -Description "$description" -Path "$path" -Enabled $true -AccountPassword(Read-Host -AsSecureString "Input a Password") -Displayname "$fname $lname" -OfficePhone "$number" -Mobile "$number"
 
 Get-ADComputer $computername | Move-ADObject -TargetPath $ComputerPath
 
@@ -128,31 +128,11 @@ Add-ADGroupMember -Identity $groupPaths -Members $username
     Write-Host "User $username added to group $groupPaths."
     Add-Content -Path "C:\User Scripts\New User Creation\Creation Logs\$username Info.txt" -Value "User $username added to group $groupPaths."
 }
-Add-Content -Path "C:\User Scripts\New User Creation\Creation Logs\$username Info.txt" -Value "
-	
-Applications:           Manager:           SharePoint:           Hardware:           License:       
-Office 365              $manager           Operation Manual      Laptop and Phone    Business Premium
-VLC
-7-Zip 
-Adobe Reader
-Greenshot
-Connectwise Connect
-Sophos VPN
-Sentinel One
-Create-a-check
-Sage
-Pirical Printer
-JAMs
-Dash.construction
-"
-	    
-	     
-
-
+Add-Content -Path "C:\User Scripts\New User Creation\Creation Logs\$username Info.txt" -Value 
 
 
 #Sync to office
-$remoteComputer = "BBSHC1JIM1V" 
+$remoteComputer = "test" 
 $scriptBlock = {
 Start-ADSyncSyncCycle delta
 }
